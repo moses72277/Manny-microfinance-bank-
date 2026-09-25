@@ -2,976 +2,1276 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Manny Microfinance Bank</title>
 
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#111111">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f4f5f7;
-color:#222
+*{
+  box-sizing:border-box;
 }
 
-button{cursor:pointer}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f3f4f6;
+  color:#111827;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
 
 #welcome{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-background:linear-gradient(135deg,#111,#333)
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  background:linear-gradient(135deg,#111827,#374151);
 }
 
 .welcome-box{
-width:100%;
-max-width:420px;
-background:white;
-padding:35px 25px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 15px 40px rgba(0,0,0,.3)
+  width:100%;
+  max-width:420px;
+  background:white;
+  border-radius:25px;
+  padding:35px 25px;
+  text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
 
 .logo{
-width:90px;
-height:90px;
-border-radius:50%;
-background:#111;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-margin:auto;
-font-size:27px;
-font-weight:bold
+  width:90px;
+  height:90px;
+  margin:auto;
+  border-radius:25px;
+  background:#111827;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:bold;
 }
 
-.welcome-box h1{font-size:25px}
+.welcome-box h1{
+  margin:20px 0 8px;
+}
 
-.welcome-box p{color:#777}
+.welcome-box p{
+  color:#6b7280;
+}
 
-.primary,
-.form-button{
-width:100%;
-padding:14px;
-border:0;
-border-radius:12px;
-background:#111;
-color:white;
-font-weight:bold;
-margin-top:10px
+.open-btn{
+  width:100%;
+  padding:16px;
+  margin-top:20px;
+  border-radius:14px;
+  background:#111827;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
 }
 
 #app{
-display:none;
-min-height:100vh;
-padding-bottom:80px
+  display:none;
+  min-height:100vh;
+  padding-bottom:80px;
 }
 
 .header{
-background:#111;
-color:white;
-padding:20px;
-position:sticky;
-top:0;
-z-index:5
+  background:#111827;
+  color:white;
+  padding:22px 18px;
 }
 
-.header h2{margin:0}
+.header h2{
+  margin:0;
+}
 
-.header small{color:#ccc}
+.header p{
+  margin:6px 0 0;
+  color:#d1d5db;
+  font-size:13px;
+}
+
+.container{
+  padding:16px;
+  max-width:600px;
+  margin:auto;
+}
 
 .screen{
-display:none;
-padding:18px
+  display:none;
 }
 
-.screen.active{display:block}
+.screen.active{
+  display:block;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:18px;
+}
 
 .card{
-background:white;
-border-radius:16px;
-padding:18px;
-margin-bottom:15px;
-box-shadow:0 4px 15px rgba(0,0,0,.06)
+  background:white;
+  border-radius:16px;
+  padding:17px;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
-.stats{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px
+.card small{
+  color:#6b7280;
 }
 
-.stat{
-background:white;
-padding:18px;
-border-radius:16px;
-box-shadow:0 4px 15px rgba(0,0,0,.06)
+.card h2{
+  margin:8px 0 0;
+  font-size:21px;
 }
 
-.stat h3{
-margin:0 0 8px;
-font-size:14px;
-color:#777
+.form-box{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  margin-bottom:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
-.stat strong{font-size:20px}
+.form-box h3{
+  margin-top:0;
+}
 
 input{
-width:100%;
-padding:13px;
-margin:7px 0;
-border:1px solid #ddd;
-border-radius:10px;
-font-size:15px
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  font-size:15px;
+}
+
+.primary{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  background:#111827;
+  color:white;
+  border-radius:11px;
+  font-weight:bold;
 }
 
 .customer{
-border-left:4px solid #111
+  background:white;
+  padding:16px;
+  border-radius:15px;
+  margin-bottom:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.06);
 }
 
-.customer h3{margin:0 0 8px}
+.customer h3{
+  margin:0 0 5px;
+}
 
 .customer p{
-margin:5px 0;
-color:#666
+  margin:5px 0;
+  color:#6b7280;
+  font-size:14px;
 }
 
-.customer-actions{
-display:flex;
-gap:8px;
-margin-top:12px
+.customer button{
+  margin-top:8px;
+  padding:10px 13px;
+  border-radius:9px;
+  background:#111827;
+  color:white;
 }
 
-.customer-actions button{
-flex:1;
-padding:10px;
-border:0;
-border-radius:9px;
-background:#111;
-color:white
+.search{
+  margin-bottom:15px;
 }
-
-.delete{background:#c62828!important}
 
 .bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:68px;
-background:white;
-border-top:1px solid #ddd;
-display:flex;
-z-index:10
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:68px;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  box-shadow:0 -3px 15px rgba(0,0,0,.12);
+  z-index:10;
 }
 
-.bottom-nav button{
-flex:1;
-border:0;
-background:white;
-font-size:11px;
-color:#666
+.nav-btn{
+  background:none;
+  color:#6b7280;
+  font-size:11px;
+  text-align:center;
 }
 
-.bottom-nav button.active{
-color:#111;
-font-weight:bold
+.nav-btn.active{
+  color:#111827;
+  font-weight:bold;
+}
+
+.nav-icon{
+  display:block;
+  font-size:21px;
+  margin-bottom:2px;
 }
 
 .profile-box{
-background:white;
-border-radius:18px;
-padding:20px
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
-.profile-row{
-display:flex;
-justify-content:space-between;
-padding:10px 0;
-border-bottom:1px solid #eee;
-gap:10px
+.profile-box h2{
+  margin-top:0;
+}
+
+.info{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
 }
 
 .payment-item{
-padding:12px;
-border-radius:10px;
-background:#f5f5f5;
-margin:8px 0
+  background:#f9fafb;
+  padding:12px;
+  border-radius:10px;
+  margin-top:9px;
 }
 
 .receipt{
-background:white;
-border-radius:15px;
-padding:20px;
-margin-top:15px
+  background:white;
+  max-width:500px;
+  margin:auto;
+  padding:25px;
+  border-radius:15px;
 }
 
-.receipt h2{text-align:center}
+.receipt h1{
+  text-align:center;
+}
 
 .receipt-line{
-display:flex;
-justify-content:space-between;
-padding:8px 0
+  display:flex;
+  justify-content:space-between;
+  padding:9px 0;
+  border-bottom:1px solid #eee;
 }
 
-.success{
-color:green;
-font-weight:bold
+.back-btn{
+  background:#111827;
+  color:white;
+  padding:11px 16px;
+  border-radius:10px;
+  margin-bottom:15px;
 }
 
-@media(max-width:380px){
-.stats{grid-template-columns:1fr}
+.danger{
+  width:100%;
+  padding:14px;
+  background:#dc2626;
+  color:white;
+  border-radius:11px;
+  font-weight:bold;
+  margin-top:10px;
 }
 
 @media print{
-body *{visibility:hidden}
-.receipt,.receipt *{visibility:visible}
-.receipt{
-position:absolute;
-left:0;
-top:0;
-width:100%
-}
+  body *{
+    visibility:hidden;
+  }
+
+  .receipt,
+  .receipt *{
+    visibility:visible;
+  }
+
+  .receipt{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- WELCOME -->
 <div id="welcome">
+  <div class="welcome-box">
 
-<div class="welcome-box">
+    <div class="logo">MMB</div>
 
-<div class="logo">MMB</div>
+    <h1>Manny Microfinance Bank</h1>
 
-<h1>Manny Microfinance Bank</h1>
+    <p>Customer & Payment Management System</p>
 
-<p>Customer & Payment Management System</p>
+    <button class="open-btn" onclick="openApp()">
+      OPEN APP
+    </button>
 
-<button class="primary" onclick="openApp()">
-OPEN APP
-</button>
-
+  </div>
 </div>
-</div>
 
 
+<!-- MAIN APP -->
 <div id="app">
 
-<div class="header">
-<h2>Manny Microfinance Bank</h2>
-<small>Customer Management System</small>
-</div>
+  <div class="header">
+    <h2>Manny Microfinance Bank</h2>
+    <p>Customer & Payment Management</p>
+  </div>
 
 
-<section id="home" class="screen active">
+  <div class="container">
 
-<h2>Dashboard</h2>
+    <!-- HOME -->
+    <section id="home" class="screen active">
 
-<div class="stats">
+      <div class="cards">
 
-<div class="stat">
-<h3>Customers</h3>
-<strong id="customerCount">0</strong>
-</div>
+        <div class="card">
+          <small>Customers</small>
+          <h2 id="customerCount">0</h2>
+        </div>
 
-<div class="stat">
-<h3>Total Loans</h3>
-<strong id="loanTotal">₦0</strong>
-</div>
+        <div class="card">
+          <small>Total Loans</small>
+          <h2 id="loanTotal">₦0</h2>
+        </div>
 
-<div class="stat">
-<h3>Total Paid</h3>
-<strong id="paidTotal">₦0</strong>
-</div>
+        <div class="card">
+          <small>Total Paid</small>
+          <h2 id="paidTotal">₦0</h2>
+        </div>
 
-<div class="stat">
-<h3>Balance</h3>
-<strong id="balanceTotal">₦0</strong>
-</div>
+        <div class="card">
+          <small>Balance</small>
+          <h2 id="balanceTotal">₦0</h2>
+        </div>
 
-</div>
-</section>
+      </div>
 
+      <div class="form-box">
+        <h3>Quick Action</h3>
 
-<section id="customers" class="screen">
+        <button class="primary"
+          onclick="showScreen('customers',document.getElementById('navCustomers'))">
+          Add Customer
+        </button>
 
-<h2>Customers</h2>
+        <button class="primary"
+          onclick="showScreen('payments',document.getElementById('navPayments'))">
+          Record Payment
+        </button>
+      </div>
 
-<div class="card">
+    </section>
 
-<h3>Add Customer</h3>
 
-<input id="customerName" placeholder="Customer name">
+    <!-- CUSTOMERS -->
+    <section id="customers" class="screen">
 
-<input id="customerId" placeholder="Customer ID">
+      <div class="form-box">
 
-<input id="customerPhone" placeholder="Phone number">
+        <h3>Add Customer</h3>
 
-<input id="customerLoan" type="number" placeholder="Loan amount">
+        <input id="customerName"
+          placeholder="Customer full name">
 
-<button class="form-button" onclick="addCustomer()">
-ADD CUSTOMER
-</button>
+        <input id="customerId"
+          placeholder="Customer ID">
 
-</div>
+        <input id="customerPhone"
+          placeholder="Phone number"
+          type="tel">
 
-<input
-id="searchCustomer"
-placeholder="Search customer..."
-oninput="showCustomers()">
+        <input id="loanAmount"
+          placeholder="Loan amount"
+          type="number">
 
-<div id="customerList"></div>
+        <button class="primary" onclick="addCustomer()">
+          SAVE CUSTOMER
+        </button>
 
-</section>
+      </div>
 
+      <input
+        class="search"
+        id="customerSearch"
+        placeholder="Search customer..."
+        oninput="showCustomers()">
 
-<section id="payments" class="screen">
+      <div id="customerList"></div>
 
-<h2>Record Payment</h2>
+    </section>
 
-<div class="card">
 
-<input id="paymentCustomerId" placeholder="Customer ID">
+    <!-- PAYMENTS -->
+    <section id="payments" class="screen">
 
-<input id="paymentAmount" type="number" placeholder="Payment amount">
+      <div class="form-box">
 
-<input id="paymentDate" type="date">
+        <h3>Record Payment</h3>
 
-<button class="form-button" onclick="addPayment()">
-SAVE PAYMENT
-</button>
+        <input
+          id="paymentCustomerId"
+          placeholder="Customer ID">
 
-</div>
+        <input
+          id="paymentAmount"
+          placeholder="Payment amount"
+          type="number">
 
-</section>
+        <button class="primary" onclick="addPayment()">
+          SAVE PAYMENT
+        </button>
 
+      </div>
 
-<section id="reports" class="screen">
+      <div id="paymentMessage"></div>
 
-<h2>Reports</h2>
+    </section>
 
-<div class="stats">
 
-<div class="stat">
-<h3>Total Loans</h3>
-<strong id="reportLoans">₦0</strong>
-</div>
+    <!-- REPORTS -->
+    <section id="reports" class="screen">
 
-<div class="stat">
-<h3>Total Payments</h3>
-<strong id="reportPayments">₦0</strong>
-</div>
+      <div class="cards">
 
-<div class="stat">
-<h3>Outstanding</h3>
-<strong id="reportBalance">₦0</strong>
-</div>
+        <div class="card">
+          <small>Total Customers</small>
+          <h2 id="reportCustomers">0</h2>
+        </div>
 
-</div>
+        <div class="card">
+          <small>Total Loan</small>
+          <h2 id="reportLoans">₦0</h2>
+        </div>
 
-</section>
+        <div class="card">
+          <small>Total Paid</small>
+          <h2 id="reportPaid">₦0</h2>
+        </div>
 
+        <div class="card">
+          <small>Outstanding</small>
+          <h2 id="reportBalance">₦0</h2>
+        </div>
 
-<section id="profile" class="screen">
+      </div>
 
-<button
-onclick="showScreen('customers')"
-style="background:#111;color:white;border:0;padding:10px 15px;border-radius:10px">
+    </section>
 
-← Back
 
-</button>
+    <!-- PROFILE -->
+    <section id="profile" class="screen">
 
-<div id="profileContent" style="margin-top:15px"></div>
+      <button class="back-btn"
+        onclick="showScreen('customers',document.getElementById('navCustomers'))">
+        ← Back
+      </button>
 
-</section>
+      <div id="profileContent"></div>
 
+    </section>
 
-<section id="settings" class="screen">
 
-<h2>Settings</h2>
+    <!-- RECEIPT -->
+    <section id="receiptScreen" class="screen">
 
-<div class="card">
+      <button class="back-btn"
+        onclick="showScreen('customers',document.getElementById('navCustomers'))">
+        ← Back
+      </button>
 
-<h3>Manny Microfinance Bank</h3>
+      <div id="receiptContent"></div>
 
-<p>Customer and payment management system.</p>
+    </section>
 
-</div>
 
-<div class="card">
+    <!-- SETTINGS -->
+    <section id="settings" class="screen">
 
-<h3>Data Management</h3>
+      <div class="form-box">
 
-<button class="form-button" onclick="clearAllData()">
-DELETE ALL RECORDS
-</button>
+        <h3>App Settings</h3>
 
-</div>
+        <p>
+          Manny Microfinance Bank
+        </p>
 
-</section>
+        <p>
+          Customer and payment records are saved on this device.
+        </p>
 
+        <button class="danger" onclick="clearAllData()">
+          DELETE ALL RECORDS
+        </button>
 
-<div class="bottom-nav">
+      </div>
 
-<button onclick="showScreen('home',this)" class="active">
-🏠<br>Home
-</button>
+    </section>
 
-<button onclick="showScreen('customers',this)">
-👥<br>Customers
-</button>
+  </div>
 
-<button onclick="showScreen('payments',this)">
-💰<br>Payments
-</button>
 
-<button onclick="showScreen('reports',this)">
-📊<br>Reports
-</button>
+  <!-- NAVIGATION -->
+  <div class="bottom-nav">
 
-<button onclick="showScreen('settings',this)">
-⚙️<br>Settings
-</button>
+    <button
+      class="nav-btn active"
+      id="navHome"
+      onclick="showScreen('home',this)">
 
-</div>
+      <span class="nav-icon">⌂</span>
+      Home
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      id="navCustomers"
+      onclick="showScreen('customers',this)">
+
+      <span class="nav-icon">👥</span>
+      Customers
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      id="navPayments"
+      onclick="showScreen('payments',this)">
+
+      <span class="nav-icon">₦</span>
+      Payments
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      id="navReports"
+      onclick="showScreen('reports',this)">
+
+      <span class="nav-icon">📊</span>
+      Reports
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      id="navSettings"
+      onclick="showScreen('settings',this)">
+
+      <span class="nav-icon">⚙</span>
+      Settings
+
+    </button>
+
+  </div>
 
 </div>
 
 
 <script>
 
-const STORAGE_KEY="microfinanceCustomers";
+const STORAGE_KEY = "microfinanceCustomers";
 
 
 function getCustomers(){
-return JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+
+  return JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "[]"
+  );
+
 }
 
 
 function saveCustomers(customers){
-localStorage.setItem(STORAGE_KEY,JSON.stringify(customers));
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(customers)
+  );
+
 }
 
 
 function money(amount){
-return "₦"+Number(amount||0).toLocaleString();
+
+  return "₦" + Number(amount || 0)
+    .toLocaleString("en-NG");
+
 }
 
 
 function openApp(){
 
-document.getElementById("welcome").style.display="none";
+  document.getElementById("welcome").style.display="none";
 
-document.getElementById("app").style.display="block";
+  document.getElementById("app").style.display="block";
 
-updateDashboard();
-showCustomers();
-updateReports();
+  updateDashboard();
+
+  showCustomers();
+
+  updateReports();
 
 }
 
 
-function showScreen(id,button){
+function showScreen(screenId,button){
 
-document.querySelectorAll(".screen").forEach(x=>{
-x.classList.remove("active");
-});
+  document.querySelectorAll(".screen")
+    .forEach(screen=>{
+      screen.classList.remove("active");
+    });
 
-const screen=document.getElementById(id);
+  const screen=document.getElementById(screenId);
 
-if(screen)screen.classList.add("active");
+  if(screen){
+    screen.classList.add("active");
+  }
 
-document.querySelectorAll(".bottom-nav button").forEach(x=>{
-x.classList.remove("active");
-});
+  document.querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
 
-if(button)button.classList.add("active");
+  if(button){
+    button.classList.add("active");
+  }
+
+  updateDashboard();
+
+  showCustomers();
+
+  updateReports();
 
 }
 
 
 function addCustomer(){
 
-const name=document.getElementById("customerName").value.trim();
+  const name=document
+    .getElementById("customerName")
+    .value.trim();
 
-const id=document.getElementById("customerId").value.trim();
+  const customerId=document
+    .getElementById("customerId")
+    .value.trim();
 
-const phone=document.getElementById("customerPhone").value.trim();
+  const phone=document
+    .getElementById("customerPhone")
+    .value.trim();
 
-const loan=Number(document.getElementById("customerLoan").value);
+  const loan=Number(
+    document.getElementById("loanAmount").value
+  );
 
-if(!name||!id||!loan){
 
-alert("Please enter customer name, ID and loan amount.");
+  if(!name || !customerId || !loan){
 
-return;
+    alert("Please enter the customer name, ID and loan amount.");
 
-}
+    return;
 
-const customers=getCustomers();
+  }
 
-if(customers.some(c=>c.customerId===id)){
 
-alert("Customer ID already exists.");
+  const customers=getCustomers();
 
-return;
 
-}
+  if(customers.some(c=>c.customerId===customerId)){
 
-customers.push({
-name:name,
-customerId:id,
-phone:phone,
-loan:loan,
-payments:[]
-});
+    alert("That Customer ID already exists.");
 
-saveCustomers(customers);
+    return;
 
-document.getElementById("customerName").value="";
-document.getElementById("customerId").value="";
-document.getElementById("customerPhone").value="";
-document.getElementById("customerLoan").value="";
+  }
 
-alert("Customer added successfully.");
 
-showCustomers();
-updateDashboard();
+  customers.push({
+
+    name:name,
+
+    customerId:customerId,
+
+    phone:phone,
+
+    loan:loan,
+
+    payments:[]
+
+  });
+
+
+  saveCustomers(customers);
+
+
+  document.getElementById("customerName").value="";
+  document.getElementById("customerId").value="";
+  document.getElementById("customerPhone").value="";
+  document.getElementById("loanAmount").value="";
+
+
+  alert("Customer saved successfully.");
+
+  showCustomers();
+
+  updateDashboard();
+
+  updateReports();
 
 }
 
 
 function addPayment(){
 
-const id=document.getElementById("paymentCustomerId").value.trim();
+  const customerId=document
+    .getElementById("paymentCustomerId")
+    .value.trim();
 
-const amount=Number(document.getElementById("paymentAmount").value);
+  const amount=Number(
+    document.getElementById("paymentAmount").value
+  );
 
-const date=document.getElementById("paymentDate").value||
-new Date().toISOString().split("T")[0];
 
-if(!id||!amount){
+  if(!customerId || !amount){
 
-alert("Enter customer ID and payment amount.");
+    alert("Enter Customer ID and payment amount.");
 
-return;
+    return;
 
-}
+  }
 
-const customers=getCustomers();
 
-const customer=customers.find(c=>c.customerId===id);
+  const customers=getCustomers();
 
-if(!customer){
+  const customer=customers.find(
+    c=>c.customerId===customerId
+  );
 
-alert("Customer not found.");
 
-return;
+  if(!customer){
 
-}
+    alert("Customer not found.");
 
-const receiptNo="MMB-"+Date.now();
+    return;
 
-customer.payments.push({
-amount:amount,
-date:date,
-receiptNo:receiptNo
-});
+  }
 
-saveCustomers(customers);
 
-document.getElementById("paymentCustomerId").value="";
-document.getElementById("paymentAmount").value="";
-document.getElementById("paymentDate").value="";
+  const receiptNo=
+    "MMB-" + Date.now();
 
-alert("Payment saved successfully.\nReceipt: "+receiptNo);
 
-updateDashboard();
-updateReports();
+  customer.payments.push({
+
+    amount:amount,
+
+    date:new Date().toLocaleString("en-NG"),
+
+    receiptNo:receiptNo
+
+  });
+
+
+  saveCustomers(customers);
+
+
+  document.getElementById("paymentCustomerId").value="";
+  document.getElementById("paymentAmount").value="";
+
+
+  document.getElementById("paymentMessage").innerHTML=`
+
+    <div class="form-box">
+
+      <h3>Payment Saved ✅</h3>
+
+      <p>Customer: ${escapeHTML(customer.name)}</p>
+
+      <p>Amount: <b>${money(amount)}</b></p>
+
+      <p>Receipt No: ${receiptNo}</p>
+
+      <button
+        class="primary"
+        onclick="showReceipt('${customer.customerId}','${receiptNo}')">
+
+        VIEW RECEIPT
+
+      </button>
+
+    </div>
+
+  `;
+
+
+  updateDashboard();
+
+  updateReports();
 
 }
 
 
 function getTotalPaid(customer){
 
-return customer.payments.reduce(
-(total,p)=>total+Number(p.amount||0),0
-);
+  return customer.payments.reduce(
+    (total,payment)=>{
+      return total + Number(payment.amount || 0);
+    },
+    0
+  );
 
 }
 
 
 function showCustomers(){
 
-const list=document.getElementById("customerList");
+  const list=document.getElementById("customerList");
 
-const search=(document.getElementById("searchCustomer").value||"").toLowerCase();
-
-const customers=getCustomers();
-
-const filtered=customers.filter(c=>
-c.name.toLowerCase().includes(search)||
-c.customerId.toLowerCase().includes(search)||
-(c.phone||"").toLowerCase().includes(search)
-);
-
-if(filtered.length===0){
-
-list.innerHTML='<div class="card">No customers found.</div>';
-
-return;
-
-}
-
-list.innerHTML=filtered.map(c=>{
-
-const paid=getTotalPaid(c);
-
-const balance=Math.max(Number(c.loan)-paid,0);
-
-return `
-
-<div class="card customer">
-
-<h3>${escapeHTML(c.name)}</h3>
-
-<p><b>ID:</b> ${escapeHTML(c.customerId)}</p>
-
-<p><b>Phone:</b> ${escapeHTML(c.phone||"Not provided")}</p>
-
-<p><b>Loan:</b> ${money(c.loan)}</p>
-
-<p><b>Paid:</b> ${money(paid)}</p>
-
-<p><b>Balance:</b> ${money(balance)}</p>
-
-<div class="customer-actions">
-
-<button onclick="viewProfile('${c.customerId}')">
-VIEW PROFILE
-</button>
-
-<button class="delete"
-onclick="deleteCustomer('${c.customerId}')">
-DELETE
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-}
+  if(!list) return;
 
 
-function viewProfile(id){
+  const search=(document
+    .getElementById("customerSearch")
+    ?.value || "")
+    .toLowerCase();
 
-const customer=getCustomers().find(c=>c.customerId===id);
 
-if(!customer){
+  const customers=getCustomers();
 
-alert("Customer not found.");
 
-return;
+  const filtered=customers.filter(c=>{
 
-}
+    return c.name.toLowerCase().includes(search) ||
+           c.customerId.toLowerCase().includes(search) ||
+           c.phone.toLowerCase().includes(search);
 
-const paid=getTotalPaid(customer);
+  });
 
-const balance=Math.max(Number(customer.loan)-paid,0);
 
-let history="";
+  if(filtered.length===0){
 
-if(customer.payments.length===0){
+    list.innerHTML=`
 
-history="<p>No payments recorded yet.</p>";
+      <div class="form-box">
+        No customers found.
+      </div>
 
-}else{
+    `;
 
-history=customer.payments.map(p=>{
+    return;
 
-const receipt=p.receiptNo||("MMB-"+new Date(p.date).getTime());
+  }
 
-return `
 
-<div class="payment-item">
+  list.innerHTML=filtered.map(customer=>{
 
-<b>${money(p.amount)}</b>
+    const paid=getTotalPaid(customer);
 
-<br>
+    const balance=Math.max(
+      Number(customer.loan)-paid,
+      0
+    );
 
-Date: ${escapeHTML(p.date)}
 
-<br>
+    return `
 
-Receipt: ${escapeHTML(receipt)}
+      <div class="customer">
 
-<br><br>
+        <h3>${escapeHTML(customer.name)}</h3>
 
-<button
-class="form-button"
-onclick="showReceipt('${customer.customerId}','${receipt}')">
+        <p>ID: ${escapeHTML(customer.customerId)}</p>
 
-VIEW RECEIPT
+        <p>Phone: ${escapeHTML(customer.phone || "Not provided")}</p>
 
-</button>
+        <p>Loan: <b>${money(customer.loan)}</b></p>
 
-</div>
+        <p>Paid: <b>${money(paid)}</b></p>
 
-`;
+        <p>Balance: <b>${money(balance)}</b></p>
 
-}).join("");
+        <button
+          onclick="viewProfile('${customer.customerId}')">
+
+          VIEW PROFILE
+
+        </button>
+
+        <button
+          onclick="deleteCustomer('${customer.customerId}')"
+          style="background:#dc2626">
+
+          DELETE
+
+        </button>
+
+      </div>
+
+    `;
+
+  }).join("");
 
 }
 
-document.getElementById("profileContent").innerHTML=`
 
-<div class="profile-box">
+function viewProfile(customerId){
 
-<h2>${escapeHTML(customer.name)}</h2>
+  const customers=getCustomers();
 
-<div class="profile-row">
-<span>Customer ID</span>
-<b>${escapeHTML(customer.customerId)}</b>
-</div>
-
-<div class="profile-row">
-<span>Phone</span>
-<b>${escapeHTML(customer.phone||"Not provided")}</b>
-</div>
-
-<div class="profile-row">
-<span>Loan</span>
-<b>${money(customer.loan)}</b>
-</div>
-
-<div class="profile-row">
-<span>Total Paid</span>
-<b>${money(paid)}</b>
-</div>
-
-<div class="profile-row">
-<span>Balance</span>
-<b>${money(balance)}</b>
-</div>
-
-</div>
-
-<div class="card">
-
-<h3>Payment History</h3>
-
-${history}
-
-</div>
-`;
-
-showScreen("profile");
-
-}
+  const customer=customers.find(
+    c=>c.customerId===customerId
+  );
 
 
-function showReceipt(id,receiptNo){
+  if(!customer) return;
 
-const customer=getCustomers().find(c=>c.customerId===id);
 
-if(!customer)return;
+  const paid=getTotalPaid(customer);
 
-const payment=customer.payments.find(p=>
-(p.receiptNo||("MMB-"+new Date(p.date).getTime()))===receiptNo
-);
+  const balance=Math.max(
+    Number(customer.loan)-paid,
+    0
+  );
 
-if(!payment){
 
-alert("Receipt not found.");
+  document.getElementById("profileContent").innerHTML=`
 
-return;
+    <div class="profile-box">
 
-}
+      <h2>${escapeHTML(customer.name)}</h2>
 
-const balance=Math.max(
-Number(customer.loan)-getTotalPaid(customer),0
-);
+      <div class="info">
+        <span>Customer ID</span>
+        <b>${escapeHTML(customer.customerId)}</b>
+      </div>
 
-document.getElementById("profileContent").innerHTML=`
+      <div class="info">
+        <span>Phone</span>
+        <b>${escapeHTML(customer.phone || "N/A")}</b>
+      </div>
 
-<button
-onclick="viewProfile('${customer.customerId}')"
-style="background:#111;color:white;border:0;padding:10px 15px;border-radius:10px">
+      <div class="info">
+        <span>Loan</span>
+        <b>${money(customer.loan)}</b>
+      </div>
 
-← Back to Profile
+      <div class="info">
+        <span>Total Paid</span>
+        <b>${money(paid)}</b>
+      </div>
 
-</button>
+      <div class="info">
+        <span>Balance</span>
+        <b>${money(balance)}</b>
+      </div>
 
-<div class="receipt">
+      <h3>Payment History</h3>
 
-<h2>Manny Microfinance Bank</h2>
+      ${
+        customer.payments.length===0
+        ?
+        "<p>No payments yet.</p>"
+        :
+        customer.payments.map(payment=>`
 
-<p style="text-align:center">
-Payment Receipt
-</p>
+          <div class="payment-item">
 
-<hr>
+            <b>${money(payment.amount)}</b>
 
-<div class="receipt-line">
-<span>Receipt No.</span>
-<b>${escapeHTML(receiptNo)}</b>
-</div>
+            <br>
 
-<div class="receipt-line">
-<span>Customer</span>
-<b>${escapeHTML(customer.name)}</b>
-</div>
+            <small>${payment.date}</small>
 
-<div class="receipt-line">
-<span>Customer ID</span>
-<b>${escapeHTML(customer.customerId)}</b>
-</div>
+            <br>
 
-<div class="receipt-line">
-<span>Date</span>
-<b>${escapeHTML(payment.date)}</b>
-</div>
+            <small>Receipt: ${payment.receiptNo}</small>
 
-<hr>
+            <br>
 
-<div class="receipt-line">
-<span>Amount Paid</span>
-<b>${money(payment.amount)}</b>
-</div>
+            <button
+              onclick="showReceipt('${customer.customerId}','${payment.receiptNo}')"
+              style="margin-top:8px;padding:8px;border-radius:8px;background:#111827;color:white">
 
-<div class="receipt-line">
-<span>Remaining Balance</span>
-<b>${money(balance)}</b>
-</div>
+              RECEIPT
 
-<p class="success" style="text-align:center">
-PAYMENT RECORDED
-</p>
+            </button>
 
-<button
-class="form-button"
-onclick="window.print()">
+          </div>
 
-PRINT RECEIPT
+        `).join("")
+      }
 
-</button>
+    </div>
 
-</div>
-`;
+  `;
 
-showScreen("profile");
+
+  showScreen(
+    "profile",
+    document.getElementById("navCustomers")
+  );
 
 }
 
 
-function deleteCustomer(id){
+function showReceipt(customerId,receiptNo){
 
-if(!confirm(
-"Delete this customer and all their payment records?"
-))return;
+  const customers=getCustomers();
 
-const customers=getCustomers()
-.filter(c=>c.customerId!==id);
+  const customer=customers.find(
+    c=>c.customerId===customerId
+  );
 
-saveCustomers(customers);
 
-showCustomers();
-updateDashboard();
-updateReports();
+  if(!customer) return;
+
+
+  const payment=customer.payments.find(
+    p=>p.receiptNo===receiptNo
+  );
+
+
+  if(!payment) return;
+
+
+  document.getElementById("receiptContent").innerHTML=`
+
+    <div class="receipt">
+
+      <h1>MANNY MICROFINANCE BANK</h1>
+
+      <p style="text-align:center">
+        Payment Receipt
+      </p>
+
+      <div class="receipt-line">
+        <span>Receipt No.</span>
+        <b>${payment.receiptNo}</b>
+      </div>
+
+      <div class="receipt-line">
+        <span>Customer</span>
+        <b>${escapeHTML(customer.name)}</b>
+      </div>
+
+      <div class="receipt-line">
+        <span>Customer ID</span>
+        <b>${escapeHTML(customer.customerId)}</b>
+      </div>
+
+      <div class="receipt-line">
+        <span>Amount Paid</span>
+        <b>${money(payment.amount)}</b>
+      </div>
+
+      <div class="receipt-line">
+        <span>Date</span>
+        <b>${payment.date}</b>
+      </div>
+
+      <br>
+
+      <p style="text-align:center">
+        Thank you for your payment.
+      </p>
+
+      <button
+        class="primary"
+        onclick="window.print()">
+
+        PRINT RECEIPT
+
+      </button>
+
+    </div>
+
+  `;
+
+
+  showScreen(
+    "receiptScreen",
+    document.getElementById("navCustomers")
+  );
+
+}
+
+
+function deleteCustomer(customerId){
+
+  if(!confirm("Delete this customer?")) return;
+
+
+  let customers=getCustomers();
+
+  customers=customers.filter(
+    c=>c.customerId!==customerId
+  );
+
+
+  saveCustomers(customers);
+
+  showCustomers();
+
+  updateDashboard();
+
+  updateReports();
 
 }
 
 
 function updateDashboard(){
 
-const customers=getCustomers();
+  const customers=getCustomers();
 
-let loans=0;
-let paid=0;
 
-customers.forEach(c=>{
+  let loans=0;
+  let paid=0;
 
-loans+=Number(c.loan||0);
-paid+=getTotalPaid(c);
 
-});
+  customers.forEach(customer=>{
 
-document.getElementById("customerCount").textContent=customers.length;
+    loans+=Number(customer.loan || 0);
 
-document.getElementById("loanTotal").textContent=money(loans);
+    paid+=getTotalPaid(customer);
 
-document.getElementById("paidTotal").textContent=money(paid);
+  });
 
-document.getElementById("balanceTotal").textContent=
-money(Math.max(loans-paid,0));
+
+  const balance=Math.max(loans-paid,0);
+
+
+  document.getElementById("customerCount").textContent=
+    customers.length;
+
+  document.getElementById("loanTotal").textContent=
+    money(loans);
+
+  document.getElementById("paidTotal").textContent=
+    money(paid);
+
+  document.getElementById("balanceTotal").textContent=
+    money(balance);
 
 }
 
 
 function updateReports(){
 
-const customers=getCustomers();
+  const customers=getCustomers();
 
-let loans=0;
-let paid=0;
 
-customers.forEach(c=>{
+  let loans=0;
+  let paid=0;
 
-loans+=Number(c.loan||0);
-paid+=getTotalPaid(c);
 
-});
+  customers.forEach(customer=>{
 
-document.getElementById("reportLoans").textContent=money(loans);
+    loans+=Number(customer.loan || 0);
 
-document.getElementById("reportPayments").textContent=money(paid);
+    paid+=getTotalPaid(customer);
 
-document.getElementById("reportBalance").textContent=
-money(Math.max(loans-paid,0));
+  });
+
+
+  const balance=Math.max(loans-paid,0);
+
+
+  document.getElementById("reportCustomers").textContent=
+    customers.length;
+
+  document.getElementById("reportLoans").textContent=
+    money(loans);
+
+  document.getElementById("reportPaid").textContent=
+    money(paid);
+
+  document.getElementById("reportBalance").textContent=
+    money(balance);
 
 }
 
 
 function clearAllData(){
 
-if(!confirm(
-"WARNING: This will delete all customers and payments. Continue?"
-))return;
+  if(!confirm(
+    "WARNING: This will delete ALL customer and payment records. Continue?"
+  )) return;
 
-localStorage.removeItem(STORAGE_KEY);
 
-updateDashboard();
-updateReports();
-showCustomers();
+  localStorage.removeItem(STORAGE_KEY);
 
-alert("All records deleted.");
+
+  updateDashboard();
+
+  updateReports();
+
+  showCustomers();
+
+
+  alert("All records have been deleted.");
 
 }
 
 
 function escapeHTML(text){
 
-return String(text||"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* SERVICE WORKER */
+
+if("serviceWorker" in navigator){
+
+  window.addEventListener("load",()=>{
+
+    navigator.serviceWorker.register("./sw.js")
+
+      .then(()=>{
+        console.log("Manny Microfinance Bank app ready");
+      })
+
+      .catch(error=>{
+        console.log(
+          "Service worker error:",
+          error
+        );
+      });
+
+  });
 
 }
 
