@@ -1,13 +1,10 @@
 {
   "name": "Manny Microfinance Bank",
   "short_name": "Manny MFB",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#111111",
   "theme_color": "#111111",
-  "orientation": "portrait",
-  "description": "Customer and payment management system",
   "icons": [
     {
       "src": "icon-192.png",
